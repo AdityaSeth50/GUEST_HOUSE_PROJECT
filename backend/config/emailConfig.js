@@ -468,7 +468,7 @@ export const sendAuthorityVerificationEmail = async (bookingData) => {
   const nights = Math.floor((checkOut - checkIn) / (1000 * 60 * 60 * 24));
   
   // Create verification links (using localhost for testing)
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = 'https://guest-house-project.onrender.com';
   const approveLink = `${baseUrl}/api/bookings/verify/${booking.bookingId}?action=approve&token=${generateVerificationToken(booking.bookingId)}`;
   const rejectLink = `${baseUrl}/api/bookings/verify/${booking.bookingId}?action=reject&token=${generateVerificationToken(booking.bookingId)}`;
   
@@ -590,7 +590,7 @@ export const sendGuestHouseConfirmationEmail = async (booking) => {
   const nights = Math.floor((checkOut - checkIn) / (1000 * 60 * 60 * 24));
   
   // Create confirmation links (using localhost for testing)
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = 'https://guest-house-project.onrender.com';
   const confirmLink = `${baseUrl}/api/bookings/guest-house-confirm/${booking.bookingId}?action=confirm&token=${generateVerificationToken(booking.bookingId)}`;
   const rejectLink = `${baseUrl}/api/bookings/guest-house-confirm/${booking.bookingId}?action=reject&token=${generateVerificationToken(booking.bookingId)}`;
   
