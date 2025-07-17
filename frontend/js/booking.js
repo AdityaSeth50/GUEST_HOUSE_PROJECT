@@ -369,7 +369,7 @@ function setupDateValidation() {
       `;
       availabilityStatus.style.color = 'var(--primary-color)';
       
-      const response = await fetch(`http://localhost:3000/api/bookings/availability?roomType=${window.selectedRoom.type}&checkIn=${checkInInput.value}&checkOut=${checkOutInput.value}`);
+      const response = await fetch(`/api/bookings/availability?roomType=${window.selectedRoom.type}&checkIn=${checkInInput.value}&checkOut=${checkOutInput.value}`);
       const data = await response.json();
       
       if (response.ok) {
@@ -834,7 +834,7 @@ function setupDateValidation() {
         sendOtpBtn.disabled = true;
       }
       
-      const response = await fetch('http://localhost:3000/api/otp/send', {
+      const response = await fetch('/api/otp/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -876,7 +876,7 @@ function setupDateValidation() {
         verifyOtpBtn.disabled = true;
       }
       
-      const response = await fetch('http://localhost:3000/api/otp/verify', {
+      const response = await fetch('/api/otp/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -1028,7 +1028,7 @@ function setupDateValidation() {
       availableElement.textContent = 'Checking...';
       availableElement.style.color = '#6c757d';
       
-      const response = await fetch(`http://localhost:3000/api/bookings/availability?roomType=${roomType}&checkIn=${checkIn}&checkOut=${checkOut}`);
+      const response = await fetch(`/api/bookings/availability?roomType=${roomType}&checkIn=${checkIn}&checkOut=${checkOut}`);
       const data = await response.json();
       
       if (response.ok) {
@@ -1228,7 +1228,7 @@ function setupDateValidation() {
       proceedBtn.disabled = true;
       
       // Create order on server
-      const orderResponse = await fetch('http://localhost:3000/api/payments/create-order', {
+      const orderResponse = await fetch('/api/payments/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -1289,7 +1289,7 @@ function setupDateValidation() {
   async function handlePaymentSuccess(paymentResponse) {
     try {
       // Verify payment on server
-      const verifyResponse = await fetch('http://localhost:3000/api/payments/verify', {
+      const verifyResponse = await fetch('/api/payments/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -1345,7 +1345,7 @@ function setupDateValidation() {
       };
       
       // Submit booking with payment details
-      const response = await fetch('http://localhost:3000/api/bookings/public', {
+      const response = await fetch('/api/bookings/public', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -1419,7 +1419,7 @@ function setupDateValidation() {
     
     // Check room availability
     const roomsRequired = Math.ceil(numGuests / 2);
-    const availabilityResponse = await fetch(`http://localhost:3000/api/bookings/availability?roomType=${window.selectedRoom.type}&checkIn=${document.getElementById('check-in').value}&checkOut=${document.getElementById('check-out').value}`);
+    const availabilityResponse = await fetch(`/api/bookings/availability?roomType=${window.selectedRoom.type}&checkIn=${document.getElementById('check-in').value}&checkOut=${document.getElementById('check-out').value}`);
     
     if (availabilityResponse.ok) {
       const availabilityData = await availabilityResponse.json();

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function checkAuthentication() {
   try {
-    const response = await fetch('http://localhost:3000/api/admin/verify', {
+    const response = await fetch('/api/admin/verify', {
       credentials: 'include'
     });
     
@@ -76,7 +76,7 @@ async function loadDashboardData() {
 
 async function loadStatistics() {
   try {
-    const response = await fetch('http://localhost:3000/api/admin/bookings/stats', {
+    const response = await fetch('/api/admin/bookings/stats', {
       credentials: 'include'
     });
     
@@ -102,7 +102,7 @@ async function loadStatistics() {
 
 async function loadBookings() {
   try {
-    const response = await fetch('http://localhost:3000/api/admin/bookings', {
+    const response = await fetch('/api/admin/bookings', {
       credentials: 'include'
     });
     
@@ -289,7 +289,7 @@ function applyFilters() {
 
 async function viewBooking(bookingId) {
   try {
-    const response = await fetch(`http://localhost:3000/api/admin/bookings/${bookingId}`, {
+    const response = await fetch(`/api/admin/bookings/${bookingId}`, {
       credentials: 'include'
     });
     
@@ -494,7 +494,7 @@ async function updateBookingStatus(bookingId, newStatus) {
     
     if (remarks === null) return; // User cancelled
     
-    const response = await fetch(`http://localhost:3000/api/admin/bookings/${bookingId}/status`, {
+    const response = await fetch(`/api/admin/bookings/${bookingId}/status`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -529,7 +529,7 @@ async function confirmDelete() {
   if (!bookingToDelete) return;
   
   try {
-    const response = await fetch(`http://localhost:3000/api/admin/bookings/${bookingToDelete}`, {
+    const response = await fetch(`/api/admin/bookings/${bookingToDelete}`, {
       method: 'DELETE',
       credentials: 'include'
     });
@@ -576,7 +576,7 @@ function showAllBookings() {
 
 async function logout() {
   try {
-    const response = await fetch('http://localhost:3000/api/admin/logout', {
+    const response = await fetch('/api/admin/logout', {
       method: 'POST',
       credentials: 'include'
     });
