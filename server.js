@@ -34,7 +34,7 @@ app.use(morgan('dev'));
 // Connect to MongoDB with retry logic
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/iiest-guest-house', {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
