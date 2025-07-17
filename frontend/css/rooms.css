@@ -1,7 +1,7 @@
 /* Room Styles */
 .room-header {
   height: 300px;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=1600') no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/lng3.jpg') no-repeat center center;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -77,12 +77,17 @@
 .room-cards {
   padding: var(--spacing-xxl) 0;
   background-color: var(--bg-light);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .rooms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: var(--spacing-xl);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .room-card {
@@ -100,7 +105,7 @@
 
 .room-image-container {
   position: relative;
-  height: 220px;
+  height: 250px;
 }
 
 .room-images {
@@ -161,19 +166,28 @@
   font-size: 1.5rem;
 }
 
-.room-price {
-  color: var(--text-dark);
-  font-weight: var(--font-weight-bold);
-  font-size: 1.2rem;
+.room-tariff {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
   margin-bottom: var(--spacing-sm);
+  color: var(--secondary-color);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.1rem;
 }
 
-.room-capacity {
+.room-capacity, .room-availability {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   margin-bottom: var(--spacing-sm);
   color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.room-availability {
+  color: var(--success-color);
+  font-weight: var(--font-weight-medium);
 }
 
 .room-features {
@@ -222,6 +236,14 @@
   color: var(--text-light);
 }
 
+.no-rooms-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-xxl);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
   .filter-container {
@@ -240,11 +262,15 @@
     max-width: 400px;
     margin-top: var(--spacing-md);
   }
+  
+  .rooms-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
   .rooms-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   
   .room-header h1 {

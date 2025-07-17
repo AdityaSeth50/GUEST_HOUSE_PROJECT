@@ -65,6 +65,50 @@ roomSchema.methods.checkAvailability = async function(checkIn, checkOut) {
   return overlappingBookings.length === 0;
 };
 
+// Static method to get available rooms count for a room type and date range
+roomSchema.statics.getAvailableRoomsCount = async function(roomType, checkIn, checkOut) {
+  const Booking = mongoose.model('Booking');
+  
+  // Convert string dates to Date objects
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+  
+  // Get all rooms of the requested type
+  const allRooms = await this.find({ 
+    type: roomType,
+    isAvailable: true 
+  });
+  
+  // Find all bookings that overlap with the requested dates for this room type
+  const overlappingBookings = await Booking.find({
+    room: { $in: allRooms.map(room => room._id) },
+    status: { $in: ['pending', 'verified', 'confirmed'] },
+    $or: [
+      // Booking check-in date falls within requested period
+      { checkIn: { $gte: checkInDate, $lt: checkOutDate } },
+      // Booking check-out date falls within requested period
+      { checkOut: { $gt: checkInDate, $lte: checkOutDate } },
+      // Booking encompasses the entire requested period
+      { checkIn: { $lte: checkInDate }, checkOut: { $gte: checkOutDate } }
+    ]
+  }).populate('room');
+  
+  // Count total rooms required by overlapping bookings
+  const totalRoomsBooked = overlappingBookings.reduce((total, booking) => {
+    return total + booking.roomsRequired;
+  }, 0);
+  
+  // Calculate available rooms
+  const totalRooms = allRooms.length;
+  const availableRooms = Math.max(0, totalRooms - totalRoomsBooked);
+  
+  return {
+    totalRooms,
+    bookedRooms: totalRoomsBooked,
+    availableRooms
+  };
+};
+
 const Room = mongoose.model('Room', roomSchema);
 
 export default Room;

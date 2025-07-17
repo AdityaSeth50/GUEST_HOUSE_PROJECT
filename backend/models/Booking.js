@@ -22,10 +22,15 @@ const bookingSchema = new mongoose.Schema({
   numGuests: {
     type: Number,
     required: true,
-    min: 1,
-    max: 2
+    min: 1
   },
-  // Guest Details
+  roomsRequired: {
+    type: Number,
+    required: true,
+    min: 1,
+    default: 1
+  },
+  // Guest Details - made flexible
   guestDetails: {
     name: {
       type: String,
@@ -33,15 +38,15 @@ const bookingSchema = new mongoose.Schema({
     },
     designation: {
       type: String,
-      required: true
+      required: false 
     },
     department: {
       type: String,
-      required: true
+      required: false
     },
     institute: {
       type: String,
-      required: true
+      required: false
     },
     email: {
       type: String,
@@ -107,6 +112,29 @@ const bookingSchema = new mongoose.Schema({
     phone: String,
     relation: String
   },
+  // Payment Details
+  paymentDetails: {
+    razorpay_order_id: String,
+    razorpay_payment_id: String,
+    razorpay_signature: String,
+    amount: {
+      type: Number,
+      default: 199 // Caution money amount
+    },
+    currency: {
+      type: String,
+      default: 'INR'
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'completed', 'failed', 'refunded'],
+      default: 'pending'
+    },
+    paidAt: {
+      type: Date,
+      default: Date.now
+    }
+  },
   // Status tracking
   status: {
     type: String,
@@ -142,7 +170,7 @@ bookingSchema.pre('save', async function(next) {
   next();
 });
 
-// Calculate nights and validate dates
+// Calculate rooms required based on number of guests
 bookingSchema.pre('validate', function(next) {
   if (this.checkIn && this.checkOut) {
     // Ensure check-out is after check-in
@@ -156,6 +184,12 @@ bookingSchema.pre('validate', function(next) {
       return next(new Error('Booking must be for at least one night'));
     }
   }
+  
+  // Calculate rooms required based on number of guests
+  if (this.numGuests) {
+    this.roomsRequired = Math.ceil(this.numGuests / 2); // Max 2 guests per room
+  }
+  
   next();
 });
 

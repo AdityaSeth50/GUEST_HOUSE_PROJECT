@@ -1,8 +1,8 @@
 /* Base Styles */
 :root {
   /* Colors */
-  --primary-color: #1A3A5A;
-  --primary-light: #2A5A8A;
+  --primary-color: rgb(44, 185, 163);
+  --primary-light: rgb(143, 198, 85);
   --primary-dark: #102A40;
   --secondary-color: #D4AF37;
   --secondary-light: #F4CF57;

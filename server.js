@@ -8,9 +8,11 @@ import morgan from 'morgan';
 
 // Route imports
 import roomRoutes from './backend/routes/roomRoutes.js';
-import userRoutes from './backend/routes/userRoutes.js';
 import bookingRoutes from './backend/routes/bookingRoutes.js';
 import paymentRoutes from './backend/routes/paymentRoutes.js';
+import contactRoutes from './backend/routes/contactRoutes.js';
+import otpRoutes from './backend/routes/otpRoutes.js';
+import adminRoutes from './backend/routes/adminRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -20,7 +22,10 @@ const PORT = process.env.PORT || 3000;
 const __dirname = path.resolve();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -43,18 +48,37 @@ const connectDB = async () => {
 
 connectDB();
 
-// Serve static files
+// Serve static files from frontend directory
 app.use(express.static(path.join(__dirname, 'frontend')));
 
 // API Routes
 app.use('/api/rooms', roomRoutes);
-app.use('/api/users', userRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/otp', otpRoutes);
+app.use('/api/admin', adminRoutes);
 
-// Serve the frontend for any other route
-app.get('*', (req, res) => {
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Server is running' });
+});
+
+// Serve specific HTML files
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+app.get('/rooms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'rooms.html'));
+});
+
+app.get('/booking', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'booking.html'));
+});
+
+app.get('/my-bookings', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'my-bookings.html'));
 });
 
 // Error handling middleware
@@ -67,4 +91,6 @@ app.use((err, req, res, next) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`Frontend available at: http://localhost:${PORT}`);
+  console.log(`To initialize rooms, visit: http://localhost:${PORT}/api/rooms/initialize`);
 });

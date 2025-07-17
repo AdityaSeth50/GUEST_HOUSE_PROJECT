@@ -1,75 +1,223 @@
 import express from 'express';
-import Booking from '../models/Booking.js';
-import { authenticateUser } from '../middleware/auth.js';
-import Stripe from 'stripe';
+import Razorpay from 'razorpay';
+import crypto from 'crypto';
+import dotenv from 'dotenv';
 
 const router = express.Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Create payment intent
-router.post('/create-payment-intent', authenticateUser, async (req, res) => {
+dotenv.config();
+
+// Initialize Razorpay
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
+
+
+// Create Razorpay order
+router.post('/create-order', async (req, res) => {
   try {
-    const { bookingId } = req.body;
+    const { amount, currency = 'INR', receipt } = req.body;
     
-    // Find booking
-    const booking = await Booking.findOne({
-      _id: bookingId,
-      user: req.user.id
-    });
-    
-    if (!booking) {
-      return res.status(404).json({ message: 'Booking not found' });
+    if (!amount || amount <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid amount'
+      });
     }
     
-    if (booking.status === 'cancelled') {
-      return res.status(400).json({ message: 'Cannot process payment for a cancelled booking' });
-    }
+    const options = {
+      amount: amount * 100, // Amount in paise
+      currency,
+      receipt: receipt || `receipt_${Date.now()}`,
+      payment_capture: 1
+    };
     
-    if (booking.paymentStatus === 'completed') {
-      return res.status(400).json({ message: 'Payment has already been completed for this booking' });
-    }
-    
-    // Create payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: booking.totalAmount * 100, // Amount in cents
-      currency: 'inr',
-      metadata: {
-        bookingId: booking._id.toString(),
-        userId: req.user.id
-      }
-    });
+    const order = await razorpay.orders.create(options);
     
     res.json({
-      clientSecret: paymentIntent.client_secret
+      success: true,
+      order_id: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      key_id: process.env.RAZORPAY_KEY_ID,
+      id: order.id
     });
+    
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Razorpay order creation error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create payment order',
+      error: error.message
+    });
   }
 });
 
-// Confirm payment (webhook handler in a real app)
-router.post('/confirm', authenticateUser, async (req, res) => {
+// Verify Razorpay payment
+router.post('/verify', async (req, res) => {
   try {
-    const { bookingId } = req.body;
-    
-    // Find booking
-    const booking = await Booking.findOne({
-      _id: bookingId,
-      user: req.user.id
-    });
-    
-    if (!booking) {
-      return res.status(404).json({ message: 'Booking not found' });
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature
+    } = req.body;
+
+        
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return res.status(400).json({
+        success: false,
+        message: 'Missing payment verification parameters'
+      });
     }
     
-    // Update booking status
-    booking.status = 'confirmed';
-    booking.paymentStatus = 'completed';
-    await booking.save();
+    // Create signature for verification
+    const body = razorpay_order_id + '|' + razorpay_payment_id;
+    const expectedSignature = crypto
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+      .update(body.toString())
+      .digest('hex');
     
-    res.json(booking);
+    console.log('Expected Signature:', expectedSignature);
+    // Verify signature
+    const isAuthentic = expectedSignature === razorpay_signature;
+    
+    if (isAuthentic) {
+      // Payment is verified
+      res.json({
+        success: true,
+        message: 'Payment verified successfully',
+        payment_id: razorpay_payment_id,
+        order_id: razorpay_order_id
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: 'Payment verification failed'
+      });
+    }
+    
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Payment verification error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Payment verification failed',
+      error: error.message
+    });
+  }
+});
+
+// Get payment details
+router.get('/payment/:paymentId', async (req, res) => {
+  try {
+    const { paymentId } = req.params;
+    
+    const payment = await razorpay.payments.fetch(paymentId);
+    
+    res.json({
+      success: true,
+      payment
+    });
+    
+  } catch (error) {
+    console.error('Payment fetch error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch payment details',
+      error: error.message
+    });
+  }
+});
+
+// Refund payment (for future use)
+router.post('/refund', async (req, res) => {
+  try {
+    const { payment_id, amount, reason = 'Booking cancellation' } = req.body;
+    
+    if (!payment_id) {
+      return res.status(400).json({
+        success: false,
+        message: 'Payment ID is required'
+      });
+    }
+    
+    const refundOptions = {
+      amount: amount ? amount * 100 : undefined, // Amount in paise, undefined for full refund
+      speed: 'normal',
+      notes: {
+        reason
+      }
+    };
+    
+    const refund = await razorpay.payments.refund(payment_id, refundOptions);
+    
+    res.json({
+      success: true,
+      refund,
+      message: 'Refund initiated successfully'
+    });
+    
+  } catch (error) {
+    console.error('Refund error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to initiate refund',
+      error: error.message
+    });
+  }
+});
+
+// Webhook handler for payment status updates
+router.post('/webhook', (req, res) => {
+  try {
+    const webhookSignature = req.headers['x-razorpay-signature'];
+    const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    
+    if (webhookSecret) {
+      // Verify webhook signature
+      const expectedSignature = crypto
+        .createHmac('sha256', webhookSecret)
+        .update(JSON.stringify(req.body))
+        .digest('hex');
+      
+      if (expectedSignature !== webhookSignature) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid webhook signature'
+        });
+      }
+    }
+    
+    const event = req.body.event;
+    const paymentEntity = req.body.payload.payment.entity;
+    
+    console.log('Webhook received:', event, paymentEntity.id);
+    
+    // Handle different webhook events
+    switch (event) {
+      case 'payment.captured':
+        console.log('Payment captured:', paymentEntity.id);
+        // Update booking status in database
+        break;
+        
+      case 'payment.failed':
+        console.log('Payment failed:', paymentEntity.id);
+        // Handle failed payment
+        break;
+        
+      default:
+        console.log('Unhandled webhook event:', event);
+    }
+    
+    res.json({ success: true });
+    
+  } catch (error) {
+    console.error('Webhook error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Webhook processing failed'
+    });
   }
 });
 

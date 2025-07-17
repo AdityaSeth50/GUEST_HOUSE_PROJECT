@@ -7,24 +7,33 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/booking.css">
+  <link rel="stylesheet" href="css/payment.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Razorpay SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
   <!-- Navigation -->
   <nav id="navbar">
-    <div class="nav-logo">
-      <img src="images/logo-placeholder.png" alt="IIEST Logo" id="college-logo">
+    <div id="nav-logo">
+      <a href="index.html">
+        <img src="images/iiestsmallbw1.png" alt="IIEST Logo" id="college-logo">
+      </a>
+      
     </div>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="index.html#about">About</a>
       <a href="index.html#gallery">Gallery</a>
       <a href="index.html#contact">Contact</a>
-      <a href="my-bookings.html" class="my-bookings-link">My Bookings</a>
+      <a href="my-bookings.html">My bookings</a>
     </div>
-    <div class="nav-book">
+    <div class="nav-auth">
       <a href="rooms.html" class="book-btn active">Book Now</a>
     </div>
     <div class="hamburger">
@@ -52,12 +61,12 @@
               <h3>Select Dates</h3>
               <div class="date-inputs">
                 <div class="date-group">
-                  <label for="check-in">Check In</label>
-                  <input type="date" id="check-in" name="check-in" required>
+                  <label for="check-in">Check In </label>
+                  <input type="text" id="check-in" name="check-in" placeholder = "Select Check-in date" required>
                 </div>
                 <div class="date-group">
                   <label for="check-out">Check Out</label>
-                  <input type="date" id="check-out" name="check-out" required>
+                  <input type="text" id="check-out" name="check-out" placeholder = "Select Check-out date" required>
                 </div>
               </div>
             </div>
@@ -70,18 +79,23 @@
                 </div>
                 <div class="step">
                   <div class="step-number">2</div>
-                  <div class="step-text">Verification by recommending authority</div>
+                  <div class="step-text">Pay caution money (₹199)</div>
                 </div>
                 <div class="step">
                   <div class="step-number">3</div>
-                  <div class="step-text">Confirmation by faculty in charge</div>
+                  <div class="step-text">Verification by recommending authority</div>
                 </div>
                 <div class="step">
                   <div class="step-number">4</div>
+                  <div class="step-text">Confirmation by faculty in charge</div>
+                </div>
+                <div class="step">
+                  <div class="step-number">5</div>
                   <div class="step-text">Email confirmation sent</div>
                 </div>
               </div>
             </div>
+            <!-- Weather forecast will be inserted here dynamically -->
           </div>
         </div>
         <div class="booking-form">
@@ -95,16 +109,16 @@
                 <input type="text" id="guest-name" name="guest-name" required>
               </div>
               <div class="form-group">
-                <label for="guest-designation">Designation *</label>
-                <input type="text" id="guest-designation" name="guest-designation" required>
+                <label for="guest-designation">Designation</label>
+                <input type="text" id="guest-designation" name="guest-designation">
               </div>
               <div class="form-group">
-                <label for="guest-department">Department *</label>
-                <input type="text" id="guest-department" name="guest-department" required>
+                <label for="guest-department">Department</label>
+                <input type="text" id="guest-department" name="guest-department">
               </div>
               <div class="form-group">
-                <label for="guest-institute">Institute/Organization *</label>
-                <input type="text" id="guest-institute" name="guest-institute" required>
+                <label for="guest-institute">Institute/Organization</label>
+                <input type="text" id="guest-institute" name="guest-institute">
               </div>
               <div class="form-group">
                 <label for="guest-email">Email *</label>
@@ -127,15 +141,11 @@
                 <label for="category">Category *</label>
                 <select id="category" name="category" required>
                   <option value="">Select Category</option>
-                  <option value="faculty-iiest">Faculty (IIEST)</option>
-                  <option value="faculty-other-institute">Faculty (Other Institute)</option>
-                  <option value="research-scholar-iiest">Research Scholar (IIEST)</option>
-                  <option value="research-scholar-other-institute">Research Scholar (Other Institute)</option>
-                  <option value="student-iiest">Student (IIEST)</option>
-                  <option value="student-other-institute">Student (Other Institute)</option>
-                  <option value="official-guest">Official Guest</option>
-                  <option value="parent-guardian">Parent/Guardian</option>
-                  <option value="alumni">Alumni</option>
+                  <option value="faculty-iiest">Faculty/Staff/Officers & Family (Current/Ex)</option>
+                  <option value="official-guests">Institute-Invited Guests</option>
+                  <option value="project_event_visitors">Project/Consultancy/Program Visitors</option>
+                  <option value="student-iiest">Student and their Parents (IIEST)</option>
+                  <option value="alumni">Alumni & their family</option>
                   <option value="others">Others</option>
                 </select>
               </div>
@@ -146,8 +156,15 @@
               <div class="form-group">
                 <label for="num-guests">Number of Guests *</label>
                 <select id="num-guests" name="num-guests" required>
+                  <option value="">Select Number</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
                 </select>
               </div>
             </div>
@@ -209,7 +226,7 @@
             <div class="booking-summary">
               <h3>Booking Summary</h3>
               <div class="summary-item">
-                <span>Room:</span>
+                <span>Room Type:</span>
                 <span id="summary-room-type">-</span>
               </div>
               <div class="summary-item">
@@ -228,10 +245,22 @@
                 <span>Number of Guests:</span>
                 <span id="summary-guests">-</span>
               </div>
+              <div class="summary-item">
+                <span>Rooms Required:</span>
+                <span id="summary-rooms">-</span>
+              </div>
+              <div class="summary-item">
+                <span>Available Rooms:</span>
+                <span id="summary-available" style="color: var(--success-color); font-weight: bold;">Checking...</span>
+              </div>
+              <div class="summary-item">
+                <span>Caution Money:</span>
+                <span style="color: var(--secondary-color); font-weight: bold;">₹199 (Refundable)</span>
+              </div>
             </div>
             <div class="form-actions">
               <button type="button" class="back-btn" onclick="window.location.href='rooms.html'">Back to Rooms</button>
-              <button type="submit" class="confirm-btn">Submit Booking Request</button>
+              <button type="submit" class="confirm-btn">Proceed to Payment</button>
             </div>
           </form>
         </div>
@@ -239,31 +268,13 @@
     </div>
   </section>
 
-  <!-- Success Modal -->
-  <div class="modal" id="success-modal">
-    <div class="modal-content">
-      <div class="success-icon">
-        <i class="fas fa-check-circle"></i>
-      </div>
-      <h2>Booking Request Submitted!</h2>
-      <p>Your booking request has been submitted successfully.</p>
-      <p>Booking ID: <span id="booking-id">XXX-XXXX-XXX</span></p>
-      <p>You will receive a confirmation email once your request is verified and approved.</p>
-      <div class="modal-actions">
-        <button id="back-to-home" class="primary-btn">Back to Home</button>
-        <button id="view-status" class="secondary-btn">Check Status</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="images/logo-placeholder.png" alt="IIEST Logo">
+          <img src="images/iiestlogo1.png" alt="IIEST Logo">
           <h3>IIEST Guest House</h3>
-          <p>Comfort and hospitality at its best</p>
         </div>
         <div class="footer-links">
           <h3>Quick Links</h3>
@@ -273,13 +284,14 @@
             <li><a href="index.html#gallery">Gallery</a></li>
             <li><a href="index.html#contact">Contact</a></li>
             <li><a href="rooms.html">Book Now</a></li>
+            <li><a href="my-bookings.html">My bookings</a></li>
           </ul>
         </div>
         <div class="footer-contact">
           <h3>Contact Us</h3>
           <p><i class="fas fa-map-marker-alt"></i> IIEST Campus, Shibpur, Howrah</p>
-          <p><i class="fas fa-phone"></i> +91 (033) 2668-4561</p>
-          <p><i class="fas fa-envelope"></i> guesthouse@iiest.ac.in</p>
+          <p><i class="fas fa-phone"></i> +91 (033) 2668-2223</p>
+          <p><i class="fas fa-envelope"></i> guesthouse@iiests.ac.in</p>
         </div>
         <div class="footer-social">
           <h3>Follow Us</h3>
@@ -297,23 +309,11 @@
     </div>
   </footer>
 
-  <!-- Room Summary Template -->
-  <template id="room-summary-template">
-    <div class="summary-image">
-      <img src="" alt="Room Image">
-    </div>
-    <div class="summary-details">
-      <h2 class="summary-title">Room Title</h2>
-      <p class="summary-description">Room description goes here.</p>
-      <div class="summary-features">
-        <!-- Features will be added dynamically -->
-      </div>
-      <div class="summary-capacity">Capacity: 2 guests</div>
-    </div>
-  </template>
-
   <!-- Scripts -->
   <script src="js/navbar.js"></script>
   <script src="js/booking.js"></script>
+  <!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </body>
 </html>
