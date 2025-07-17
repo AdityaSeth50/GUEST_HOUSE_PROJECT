@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Room - IIEST Guest House</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/booking.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo-placeholder.png" alt="IIEST Logo" id="college-logo">
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="my-bookings.html" class="my-bookings-link">My Bookings</a>
+    </div>
+    <div class="nav-book">
+      <a href="rooms.html" class="book-btn active">Book Now</a>
+    </div>
+    <div class="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </nav>
+
+  <!-- Booking Section -->
+  <section class="booking-section">
+    <div class="container">
+      <div class="booking-container">
+        <div class="booking-info">
+          <h1>Room Booking Request</h1>
+          <div class="room-summary" id="room-summary">
+            <!-- Room summary will be loaded dynamically -->
+            <div class="loading-spinner">
+              <div class="spinner"></div>
+              <p>Loading room details...</p>
+            </div>
+          </div>
+          <div class="date-weather-container">
+            <div class="date-picker">
+              <h3>Select Dates</h3>
+              <div class="date-inputs">
+                <div class="date-group">
+                  <label for="check-in">Check In</label>
+                  <input type="date" id="check-in" name="check-in" required>
+                </div>
+                <div class="date-group">
+                  <label for="check-out">Check Out</label>
+                  <input type="date" id="check-out" name="check-out" required>
+                </div>
+              </div>
+            </div>
+            <div class="booking-process">
+              <h3>Booking Process</h3>
+              <div class="process-steps">
+                <div class="step">
+                  <div class="step-number">1</div>
+                  <div class="step-text">Submit booking request</div>
+                </div>
+                <div class="step">
+                  <div class="step-number">2</div>
+                  <div class="step-text">Verification by recommending authority</div>
+                </div>
+                <div class="step">
+                  <div class="step-number">3</div>
+                  <div class="step-text">Confirmation by faculty in charge</div>
+                </div>
+                <div class="step">
+                  <div class="step-number">4</div>
+                  <div class="step-text">Email confirmation sent</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="booking-form">
+          <h2>Guest House Booking Form</h2>
+          <form id="booking-form">
+            <!-- Guest Information -->
+            <div class="form-section">
+              <h3>Guest Information</h3>
+              <div class="form-group">
+                <label for="guest-name">Full Name *</label>
+                <input type="text" id="guest-name" name="guest-name" required>
+              </div>
+              <div class="form-group">
+                <label for="guest-designation">Designation *</label>
+                <input type="text" id="guest-designation" name="guest-designation" required>
+              </div>
+              <div class="form-group">
+                <label for="guest-department">Department *</label>
+                <input type="text" id="guest-department" name="guest-department" required>
+              </div>
+              <div class="form-group">
+                <label for="guest-institute">Institute/Organization *</label>
+                <input type="text" id="guest-institute" name="guest-institute" required>
+              </div>
+              <div class="form-group">
+                <label for="guest-email">Email *</label>
+                <input type="email" id="guest-email" name="guest-email" required>
+              </div>
+              <div class="form-group">
+                <label for="guest-phone">Phone *</label>
+                <input type="tel" id="guest-phone" name="guest-phone" required>
+              </div>
+              <div class="form-group">
+                <label for="guest-address">Address *</label>
+                <textarea id="guest-address" name="guest-address" rows="3" required></textarea>
+              </div>
+            </div>
+
+            <!-- Category and Purpose -->
+            <div class="form-section">
+              <h3>Category and Purpose</h3>
+              <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                  <option value="">Select Category</option>
+                  <option value="faculty-iiest">Faculty (IIEST)</option>
+                  <option value="faculty-other-institute">Faculty (Other Institute)</option>
+                  <option value="research-scholar-iiest">Research Scholar (IIEST)</option>
+                  <option value="research-scholar-other-institute">Research Scholar (Other Institute)</option>
+                  <option value="student-iiest">Student (IIEST)</option>
+                  <option value="student-other-institute">Student (Other Institute)</option>
+                  <option value="official-guest">Official Guest</option>
+                  <option value="parent-guardian">Parent/Guardian</option>
+                  <option value="alumni">Alumni</option>
+                  <option value="others">Others</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="purpose-of-visit">Purpose of Visit *</label>
+                <textarea id="purpose-of-visit" name="purpose-of-visit" rows="3" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="num-guests">Number of Guests *</label>
+                <select id="num-guests" name="num-guests" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Recommending Authority -->
+            <div class="form-section">
+              <h3>Recommending Authority</h3>
+              <div class="recommending-authority-info" id="recommending-authority-info">
+                <p class="info-note">Please select a category to see the recommending authority details.</p>
+              </div>
+              <div class="form-group">
+                <label for="auth-name">Name *</label>
+                <input type="text" id="auth-name" name="auth-name" required>
+              </div>
+              <div class="form-group">
+                <label for="auth-designation">Designation *</label>
+                <input type="text" id="auth-designation" name="auth-designation" required>
+              </div>
+              <div class="form-group">
+                <label for="auth-department">Department *</label>
+                <input type="text" id="auth-department" name="auth-department" required>
+              </div>
+              <div class="form-group">
+                <label for="auth-email">Email *</label>
+                <input type="email" id="auth-email" name="auth-email" required>
+              </div>
+              <div class="form-group">
+                <label for="auth-phone">Phone *</label>
+                <input type="tel" id="auth-phone" name="auth-phone" required>
+              </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="form-section">
+              <h3>Emergency Contact</h3>
+              <div class="form-group">
+                <label for="emergency-name">Name</label>
+                <input type="text" id="emergency-name" name="emergency-name">
+              </div>
+              <div class="form-group">
+                <label for="emergency-phone">Phone</label>
+                <input type="tel" id="emergency-phone" name="emergency-phone">
+              </div>
+              <div class="form-group">
+                <label for="emergency-relation">Relation</label>
+                <input type="text" id="emergency-relation" name="emergency-relation">
+              </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section">
+              <h3>Additional Information</h3>
+              <div class="form-group">
+                <label for="special-requests">Special Requests (Optional)</label>
+                <textarea id="special-requests" name="special-requests" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="booking-summary">
+              <h3>Booking Summary</h3>
+              <div class="summary-item">
+                <span>Room:</span>
+                <span id="summary-room-type">-</span>
+              </div>
+              <div class="summary-item">
+                <span>Check In:</span>
+                <span id="summary-check-in">-</span>
+              </div>
+              <div class="summary-item">
+                <span>Check Out:</span>
+                <span id="summary-check-out">-</span>
+              </div>
+              <div class="summary-item">
+                <span>Number of Nights:</span>
+                <span id="summary-nights">-</span>
+              </div>
+              <div class="summary-item">
+                <span>Number of Guests:</span>
+                <span id="summary-guests">-</span>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="back-btn" onclick="window.location.href='rooms.html'">Back to Rooms</button>
+              <button type="submit" class="confirm-btn">Submit Booking Request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="modal" id="success-modal">
+    <div class="modal-content">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Booking Request Submitted!</h2>
+      <p>Your booking request has been submitted successfully.</p>
+      <p>Booking ID: <span id="booking-id">XXX-XXXX-XXX</span></p>
+      <p>You will receive a confirmation email once your request is verified and approved.</p>
+      <div class="modal-actions">
+        <button id="back-to-home" class="primary-btn">Back to Home</button>
+        <button id="view-status" class="secondary-btn">Check Status</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo-placeholder.png" alt="IIEST Logo">
+          <h3>IIEST Guest House</h3>
+          <p>Comfort and hospitality at its best</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="rooms.html">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> IIEST Campus, Shibpur, Howrah</p>
+          <p><i class="fas fa-phone"></i> +91 (033) 2668-4561</p>
+          <p><i class="fas fa-envelope"></i> guesthouse@iiest.ac.in</p>
+        </div>
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 IIEST Guest House. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Room Summary Template -->
+  <template id="room-summary-template">
+    <div class="summary-image">
+      <img src="" alt="Room Image">
+    </div>
+    <div class="summary-details">
+      <h2 class="summary-title">Room Title</h2>
+      <p class="summary-description">Room description goes here.</p>
+      <div class="summary-features">
+        <!-- Features will be added dynamically -->
+      </div>
+      <div class="summary-capacity">Capacity: 2 guests</div>
+    </div>
+  </template>
+
+  <!-- Scripts -->
+  <script src="js/navbar.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

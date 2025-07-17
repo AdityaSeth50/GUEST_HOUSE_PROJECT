@@ -1,0 +1,154 @@
+/* Navbar Styles */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(26, 58, 90, 0.9);
+  backdrop-filter: blur(5px);
+  padding: var(--spacing-md) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.nav-logo {
+  margin-left: var(--spacing-xl);
+}
+
+#college-logo {
+  height: 50px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.nav-links a {
+  color: var(--text-light);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--secondary-color);
+  transition: width var(--transition-normal);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-book {
+  margin-right: var(--spacing-xl);
+}
+
+.book-btn {
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+.book-btn:hover, .book-btn.active {
+  background-color: var(--secondary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-right: var(--spacing-xl);
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-light);
+  margin: 3px 0;
+  transition: var(--transition-fast);
+}
+
+/* Scroll Effect */
+#navbar.scrolled {
+  padding: var(--spacing-sm) 0;
+  background-color: var(--primary-color);
+}
+
+/* Responsive Navbar */
+@media (max-width: 992px) {
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: var(--primary-color);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: var(--spacing-xxl);
+    transition: left var(--transition-normal);
+    gap: var(--spacing-xl);
+  }
+  
+  .nav-links.active {
+    left: 0;
+  }
+  
+  .hamburger {
+    display: flex;
+  }
+  
+  .hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-logo {
+    margin-left: var(--spacing-md);
+  }
+  
+  #college-logo {
+    height: 40px;
+  }
+  
+  .nav-book {
+    margin-right: var(--spacing-sm);
+  }
+  
+  .book-btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+  
+  .hamburger {
+    margin-right: var(--spacing-md);
+  }
+}

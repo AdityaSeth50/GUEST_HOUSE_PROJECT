@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IIEST Guest House</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo-placeholder.png" alt="IIEST Logo" id="college-logo">
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a href="#my-bookings" class="my-bookings-link">My Bookings</a>
+    </div>
+    <div class="nav-book">
+      <a href="rooms.html" class="book-btn">Book Now</a>
+    </div>
+    <div class="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="animate-on-scroll">Welcome to IIEST Guest House</h1>
+      <p class="animate-on-scroll">Experience comfort and hospitality at our premium accommodation</p>
+      <a href="rooms.html" class="hero-btn animate-on-scroll">Explore Rooms</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">About Us</h2>
+      <div class="about-content">
+        <div class="about-image animate-on-scroll">
+          <img src="https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg" alt="Guest House Exterior">
+        </div>
+        <div class="about-text animate-on-scroll">
+          <h3>Our Story</h3>
+          <p>IIEST Guest House provides comfortable accommodation for visiting faculty, parents, alumni, and other guests of the Indian Institute of Engineering Science and Technology, Shibpur.</p>
+          <p>Our guest house features well-appointed rooms, a restaurant serving delicious meals, and all the amenities needed for a pleasant stay. Located within the beautiful campus, we offer a peaceful retreat with easy access to the institute.</p>
+          <div class="features">
+            <div class="feature">
+              <i class="fas fa-wifi"></i>
+              <span>Free WiFi</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-utensils"></i>
+              <span>Restaurant</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-parking"></i>
+              <span>Parking</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-concierge-bell"></i>
+              <span>24/7 Service</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Gallery</h2>
+      <div class="gallery-filter animate-on-scroll">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="rooms">Rooms</button>
+        <button class="filter-btn" data-filter="restaurant">Restaurant</button>
+        <button class="filter-btn" data-filter="exterior">Exterior</button>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item rooms animate-on-scroll">
+          <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg" alt="Deluxe Room">
+          <div class="gallery-overlay">
+            <h3>Deluxe Room</h3>
+          </div>
+        </div>
+        <div class="gallery-item rooms animate-on-scroll">
+          <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg" alt="Standard Room">
+          <div class="gallery-overlay">
+            <h3>Standard Room</h3>
+          </div>
+        </div>
+        <div class="gallery-item restaurant animate-on-scroll">
+          <img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg" alt="Restaurant">
+          <div class="gallery-overlay">
+            <h3>Restaurant</h3>
+          </div>
+        </div>
+        <div class="gallery-item exterior animate-on-scroll">
+          <img src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg" alt="Garden">
+          <div class="gallery-overlay">
+            <h3>Garden</h3>
+          </div>
+        </div>
+        <div class="gallery-item rooms animate-on-scroll">
+          <img src="https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg" alt="Suite">
+          <div class="gallery-overlay">
+            <h3>Suite</h3>
+          </div>
+        </div>
+        <div class="gallery-item restaurant animate-on-scroll">
+          <img src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg" alt="Dining Area">
+          <div class="gallery-overlay">
+            <h3>Dining Area</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Contact Us</h2>
+      <div class="contact-container">
+        <div class="contact-info animate-on-scroll">
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3>Location</h3>
+              <p>IIEST Campus, Shibpur, Howrah, West Bengal, India</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3>Phone</h3>
+              <p>+91 (033) 2668-4561</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email</h3>
+              <p>guesthouse@iiest.ac.in</p>
+            </div>
+          </div>
+          <div class="map-container">
+            <h3>Find Us</h3>
+            <div id="map" class="map"></div>
+          </div>
+        </div>
+        <div class="contact-form animate-on-scroll">
+          <h3>Send a Message</h3>
+          <form id="message-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo-placeholder.png" alt="IIEST Logo">
+          <h3>IIEST Guest House</h3>
+          <p>Comfort and hospitality at its best</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="rooms.html">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> IIEST Campus, Shibpur, Howrah</p>
+          <p><i class="fas fa-phone"></i> +91 (033) 2668-4561</p>
+          <p><i class="fas fa-envelope"></i> guesthouse@iiest.ac.in</p>
+        </div>
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 IIEST Guest House. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/navbar.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>

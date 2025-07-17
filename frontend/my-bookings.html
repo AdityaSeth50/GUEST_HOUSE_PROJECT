@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings - IIEST Guest House</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/my-bookings.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo-placeholder.png" alt="IIEST Logo" id="college-logo">
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="my-bookings.html" class="my-bookings-link active">My Bookings</a>
+    </div>
+    <div class="nav-book">
+      <a href="rooms.html" class="book-btn">Book Now</a>
+    </div>
+    <div class="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </nav>
+
+  <!-- My Bookings Section -->
+  <section class="my-bookings-section">
+    <div class="container">
+      <h1>My Bookings</h1>
+      
+      <!-- User Login Form (shown if not logged in) -->
+      <div class="login-container" id="login-container">
+        <h2>Sign In to View Your Bookings</h2>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <button type="submit" class="login-btn">Sign In</button>
+        </form>
+        <div class="login-footer">
+          <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+        </div>
+      </div>
+
+      <!-- User Registration Form (hidden by default) -->
+      <div class="register-container" id="register-container" style="display: none;">
+        <h2>Create an Account</h2>
+        <form id="register-form">
+          <div class="form-group">
+            <label for="register-name">Full Name</label>
+            <input type="text" id="register-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="register-phone">Phone</label>
+            <input type="tel" id="register-phone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" name="password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+          </div>
+          <button type="submit" class="register-btn">Register</button>
+        </form>
+        <div class="register-footer">
+          <p>Already have an account? <a href="#" id="show-login">Sign In</a></p>
+        </div>
+      </div>
+
+      <!-- Bookings List (shown after login) -->
+      <div class="bookings-container" id="bookings-container" style="display: none;">
+        <div class="bookings-filter">
+          <select id="booking-filter">
+            <option value="all">All Bookings</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="past">Past</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        
+        <div class="bookings-list" id="bookings-list">
+          <!-- Bookings will be loaded dynamically -->
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading your bookings...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Details Modal -->
+  <div class="modal" id="booking-details-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Booking Details</h2>
+      <div class="booking-details-container" id="modal-booking-details">
+        <!-- Booking details will be loaded dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="images/logo-placeholder.png" alt="IIEST Logo">
+          <h3>IIEST Guest House</h3>
+          <p>Comfort and hospitality at its best</p>
+        </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="rooms.html">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> IIEST Campus, Shibpur, Howrah</p>
+          <p><i class="fas fa-phone"></i> +91 (033) 2668-4561</p>
+          <p><i class="fas fa-envelope"></i> guesthouse@iiest.ac.in</p>
+        </div>
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 IIEST Guest House. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking Card Template -->
+  <template id="booking-card-template">
+    <div class="booking-card">
+      <div class="booking-header">
+        <h3 class="booking-id">Booking #ID</h3>
+        <span class="booking-status">Status</span>
+      </div>
+      <div class="booking-details">
+        <div class="booking-room">
+          <img src="" alt="Room Image" class="room-thumbnail">
+          <div class="room-info">
+            <h4 class="room-title">Room Title</h4>
+            <p class="booking-dates">Check In - Check Out</p>
+          </div>
+        </div>
+        <div class="booking-info">
+          <div class="info-item">
+            <span class="info-label">Guests:</span>
+            <span class="info-value guests-count">0</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Total:</span>
+            <span class="info-value booking-amount">₹0</span>
+          </div>
+        </div>
+      </div>
+      <div class="booking-actions">
+        <button class="view-details-btn">View Details</button>
+        <button class="cancel-booking-btn">Cancel Booking</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Booking Details Template for Modal -->
+  <template id="booking-details-template">
+    <div class="modal-booking-info">
+      <div class="modal-booking-header">
+        <div>
+          <h3 class="modal-room-title">Room Title</h3>
+          <p class="modal-booking-id">Booking #ID</p>
+        </div>
+        <span class="modal-booking-status">Status</span>
+      </div>
+      <div class="modal-booking-image">
+        <img src="" alt="Room Image">
+      </div>
+      <div class="modal-booking-details">
+        <div class="detail-group">
+          <h4>Booking Information</h4>
+          <div class="detail-item">
+            <span class="detail-label">Check In:</span>
+            <span class="detail-value check-in-date">Date</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Check Out:</span>
+            <span class="detail-value check-out-date">Date</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Guests:</span>
+            <span class="detail-value guest-count">0</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Total Amount:</span>
+            <span class="detail-value total-amount">₹0</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Payment Method:</span>
+            <span class="detail-value payment-method">Method</span>
+          </div>
+        </div>
+        <div class="detail-group">
+          <h4>Guest Information</h4>
+          <div class="detail-item">
+            <span class="detail-label">Name:</span>
+            <span class="detail-value guest-name">Name</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Email:</span>
+            <span class="detail-value guest-email">Email</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Phone:</span>
+            <span class="detail-value guest-phone">Phone</span>
+          </div>
+        </div>
+        <div class="detail-group">
+          <h4>Special Requests</h4>
+          <p class="special-requests">None</p>
+        </div>
+      </div>
+      <div class="modal-booking-actions">
+        <button class="print-booking-btn"><i class="fas fa-print"></i> Print</button>
+        <button class="cancel-booking-btn"><i class="fas fa-times-circle"></i> Cancel Booking</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Scripts -->
+  <script src="js/navbar.js"></script>
+  <script src="js/my-bookings.js"></script>
+</body>
+</html>

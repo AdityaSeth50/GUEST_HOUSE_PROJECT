@@ -1,0 +1,300 @@
+/* Payment Page Styles */
+.payment-section {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  padding-top: calc(70px + var(--spacing-xxl));
+}
+
+.payment-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.payment-summary h1 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Booking Details */
+.booking-details {
+  background-color: var(--text-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.booking-room {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.booking-room-image {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.booking-room-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-room-details h3 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.booking-room-price {
+  font-weight: var(--font-weight-bold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.booking-detail-list {
+  margin-top: var(--spacing-lg);
+}
+
+.booking-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+}
+
+.booking-detail-label {
+  color: var(--text-muted);
+}
+
+.booking-detail-value {
+  font-weight: var(--font-weight-medium);
+}
+
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  border-top: 2px solid var(--border-color);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.2rem;
+}
+
+/* Payment Methods */
+.payment-methods {
+  background-color: var(--text-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.payment-methods h2 {
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-lg);
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.payment-option {
+  position: relative;
+}
+
+.payment-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.payment-option label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.payment-option input[type="radio"]:checked + label {
+  border-color: var(--primary-color);
+  background-color: rgba(26, 58, 90, 0.05);
+}
+
+.payment-option label i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.payment-form {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.total-amount {
+  background-color: var(--bg-light);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.total-amount h3 {
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-normal);
+}
+
+.amount {
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-weight: var(--font-weight-bold);
+}
+
+.payment-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.back-btn {
+  flex: 1;
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: var(--spacing-md) 0;
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.back-btn:hover {
+  background-color: var(--bg-light);
+}
+
+.pay-btn {
+  flex: 2;
+  background-color: var(--success-color);
+  color: var(--text-light);
+  border: none;
+  padding: var(--spacing-md) 0;
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pay-btn:hover {
+  background-color: #218838;
+}
+
+/* Success Modal */
+.success-icon {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.success-icon i {
+  font-size: 5rem;
+  color: var(--success-color);
+}
+
+#success-modal h2 {
+  text-align: center;
+  color: var(--success-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+#success-modal p {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+#booking-id {
+  font-weight: var(--font-weight-bold);
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.primary-btn {
+  flex: 1;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: var(--spacing-md) 0;
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.secondary-btn {
+  flex: 1;
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: var(--spacing-md) 0;
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.secondary-btn:hover {
+  background-color: var(--bg-light);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .payment-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .booking-room {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .booking-room-image {
+    width: 100%;
+    height: 150px;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-actions {
+    flex-direction: column;
+  }
+}

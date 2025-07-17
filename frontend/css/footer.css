@@ -1,0 +1,131 @@
+/* Footer Styles */
+.footer {
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+  padding: var(--spacing-xl) 0 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-xl);
+}
+
+.footer-logo img {
+  height: 60px;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-logo h3 {
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-links h3,
+.footer-contact h3,
+.footer-social h3 {
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.2rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-links a {
+  color: var(--text-light);
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--secondary-color);
+}
+
+.footer-contact p {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-contact i {
+  color: var(--secondary-color);
+}
+
+.social-icons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.social-icons a:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+}
+
+.social-icons i {
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: var(--spacing-md) 0;
+  margin-top: var(--spacing-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive Footer */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .footer-logo,
+  .footer-links,
+  .footer-contact,
+  .footer-social {
+    text-align: center;
+  }
+  
+  .footer-logo img {
+    margin: 0 auto var(--spacing-md);
+  }
+  
+  .footer-contact p {
+    justify-content: center;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
