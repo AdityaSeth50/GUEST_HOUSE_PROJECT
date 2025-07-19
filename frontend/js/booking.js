@@ -290,59 +290,48 @@ document.addEventListener('DOMContentLoaded', function() {
     `).join('');
   }
 function setupDateValidation() {
-  const today = new Date();
-  const maxDate = new Date();
-  maxDate.setMonth(today.getMonth() + 2);
-
   const checkInInput = document.getElementById('check-in');
   const checkOutInput = document.getElementById('check-out');
 
-  // Enable both inputs
-  checkInInput.disabled = false;
-  checkOutInput.disabled = false;
+  // Initialize Flatpickr for check-out first so we can reference it later
+  const checkOutPicker = flatpickr(checkOutInput, {
+    altInput: true,
+    altFormat: "d-m-Y",
+    dateFormat: "Y-m-d",
+    disableMobile: true,  // Force consistent behavior on mobile
+  });
 
-  // Initialize Flatpickr on check-in input
+  // Initialize Flatpickr for check-in
   flatpickr(checkInInput, {
     altInput: true,
-    altFormat: "d-m-Y",     // Shown to user
-    dateFormat: "Y-m-d",    // Sent to backend
-    minDate: today,
-    maxDate: maxDate,
-    onChange: function (selectedDates) {
-      if (selectedDates.length > 0) {
-        const checkInDate = selectedDates[0];
+    altFormat: "d-m-Y",
+    dateFormat: "Y-m-d",
+    minDate: "today",
+    disableMobile: true,  // Force consistent behavior on mobile
 
-        // Calculate min checkout date
-        const minCheckout = new Date(checkInDate);
-        minCheckout.setDate(minCheckout.getDate() + 1);
+    onChange: function (selectedDates, dateStr) {
+      if (!selectedDates.length) return;
 
-        // Reinitialize checkout picker
-        flatpickr(checkOutInput, {
-          altInput: true,
-          altFormat: "d-m-Y",
-          dateFormat: "Y-m-d",
-          minDate: minCheckout,
-          maxDate: maxDate,
-        });
+      const checkInDate = new Date(dateStr);
+      const minCheckOutDate = new Date(checkInDate);
+      minCheckOutDate.setDate(minCheckOutDate.getDate() + 1);
 
-        checkOutInput.disabled = false;
+      checkOutPicker.set("minDate", minCheckOutDate);
+      checkOutPicker.clear(); // Clear existing value if it violates new min
 
-        // Optional: Clear any previous value
-        checkOutInput.value = '';
-
-        updateBookingSummary();
-        checkRoomAvailabilityForDates();
-        checkWeatherForecast();
-      }
+      updateBookingSummary();
+      checkRoomAvailabilityForDates();
+      checkWeatherForecast();
     }
   });
 
-  // Optional: Add listener to update when check-out changes
-  checkOutInput.addEventListener('change', () => {
+  // Add event listener for check-out to trigger updates
+  checkOutInput.addEventListener('change', function () {
     updateBookingSummary();
     checkRoomAvailabilityForDates();
   });
 }
+
 
 
 
