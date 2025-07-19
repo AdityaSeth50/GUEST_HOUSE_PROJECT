@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const roomType = urlParams.get('type');
     
     if (!roomType) {
-      window.location.href = 'rooms.html';
+      window.location.href = '/rooms';
       return;
     }
 
@@ -1481,8 +1481,8 @@ function setupDateValidation() {
           <li>You will receive email updates on your booking status</li>
         </ol>
         <div class="modal-actions">
-          <button class="primary-btn" onclick="window.location.href='index.html'">Back to Home</button>
-          <button class="secondary-btn" onclick="window.location.href='my-bookings.html'">Check Booking Status</button>
+          <button class="primary-btn" onclick="window.location.href='/'">Back to Home</button>
+          <button class="secondary-btn" onclick="window.location.href='/my-bookings'">Check Booking Status</button>
         </div>
       </div>
     `;
@@ -1493,7 +1493,7 @@ function setupDateValidation() {
     setTimeout(() => {
       if (document.body.contains(modal)) {
         document.body.removeChild(modal);
-        window.location.href = 'index.html';
+        window.location.href = '/';
       }
     }, 20000);
   }

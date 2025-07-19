@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set book button link - ALWAYS CLICKABLE
     const bookButton = roomCard.querySelector('.book-room-btn');
-    bookButton.href = `booking.html?type=${room.type}`;
+    bookButton.href = `booking?type=${room.type}`;
     bookButton.textContent = 'Check Availability & Book';
     bookButton.style.backgroundColor = 'var(--primary-color)';
     bookButton.style.cursor = 'pointer';
